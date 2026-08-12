@@ -4,7 +4,9 @@
 Marketing site for **Cumbayá Pádel Center** (Quito, Ecuador): a padel club with an academy, group classes, a physical-conditioning brand (StreetFit) and an online court-booking funnel. Six pages, dark editorial look, all copy in Spanish (Ecuador) with an EN toggle.
 
 ## About the design files
-The files in `design/` are **design references authored as HTML prototypes** — they show the intended look, motion and behavior. They are **not production code to copy verbatim**. The job is to **recreate these screens in the target codebase's own environment** (React/Next, Vue, Astro, etc.) using its established component patterns, routing and asset pipeline. If no codebase exists yet, pick the framework that fits the project (a static-first framework such as Next.js or Astro suits this content site) and implement there.
+The files at the repo root are **design references authored as HTML prototypes** — they show the intended look, motion and behavior. They are **not production code to copy verbatim**. The job is to **recreate these screens in the target codebase's own environment** (React/Next, Vue, Astro, etc.) using its established component patterns, routing and asset pipeline. If no codebase exists yet, pick the framework that fits the project (a static-first framework such as Next.js or Astro suits this content site) and implement there.
+
+They live at the repo root (not in a `design/` subfolder) so the repo can be served directly by GitHub Pages, Netlify or Vercel for design review — `.nojekyll` disables GitHub's default Jekyll processing, which otherwise renders this README as the homepage and silently drops `_redirects` (Jekyll excludes underscore-prefixed files).
 
 One mechanic in the prototypes is an authoring-tool artifact and should **not** be ported:
 - `support.js` and the `<x-dc>` / `{{ }}` template syntax — the prototype runtime. It is only here so the files open in a browser. Replace with the target framework's components and props.
@@ -76,12 +78,12 @@ A photo with a flat brand-color card peeking out behind it.
 
 | Screen | File | Purpose |
 |---|---|---|
-| Home | `design/index.html` | Brand intro, club highlights, photo stacks, sponsors, booking CTA |
-| Club | `design/Club.dc.html` | Facilities, courts, amenities |
-| Academia | `design/Academia.dc.html` | Academy programs, certification section (canonical "Carla" block), coach cards, CTA band |
-| Clases | `design/Clases.dc.html` | Group class formats and schedule |
-| StreetFit | `design/StreetFit.dc.html` | Conditioning brand: hero, methodology band (blue), athlete grid, marquee |
-| Reservas | `design/Reservas.dc.html` | 7-step booking walkthrough with numbered screenshots, lime final step |
+| Home | `index.html` | Brand intro, club highlights, photo stacks, sponsors, booking CTA |
+| Club | `Club.dc.html` | Facilities, courts, amenities |
+| Academia | `Academia.dc.html` | Academy programs, certification section (canonical "Carla" block), coach cards, CTA band |
+| Clases | `Clases.dc.html` | Group class formats and schedule |
+| StreetFit | `StreetFit.dc.html` | Conditioning brand: hero, methodology band (blue), athlete grid, marquee |
+| Reservas | `Reservas.dc.html` | 7-step booking walkthrough with numbered screenshots, lime final step |
 
 Shared: `NavBar.dc.html`, `Footer.dc.html`, `mobile.css`, `i18n.js`, `streetfit-marquee.js`.
 
@@ -174,7 +176,7 @@ Cada página indexable lleva, en el `<head>` real (no dentro del runtime, para q
 
 ## Assets
 
-**Not bundled.** The markup references **90 image files** by relative path. Export them from the project (or request the full project zip) and drop them into the target app's static assets, keeping the filenames so the references resolve. Until then every screen renders with broken images — that is expected, not a bug in the markup.
+**Bundled.** All referenced image files ship in this repo, at the paths the markup expects — nothing to export or drop in separately.
 
 Formats: `.webp` photos (typically 654×982 portrait, ~75KB), `.jpg` app screenshots, `.png`/`.svg` logos and icons.
 
@@ -209,19 +211,19 @@ Fonts are Google Fonts: `Instrument Serif` (400, 400 italic) and `Archivo` (400/
 
 ## Files in this bundle
 ```
-design/
-  index.html            Home
-  Club.dc.html          Club
-  Academia.dc.html      Academia
-  Clases.dc.html        Clases
-  StreetFit.dc.html     StreetFit
-  Reservas.dc.html      Reservas
-  NavBar.dc.html        Nav + shared runtime (reveals, cursor, flip stacks)
-  Footer.dc.html        Footer
-  mobile.css            Responsive layer
-  i18n.js               ES/EN toggle
-  streetfit-marquee.js  Marquee loop
-  support.js            Prototype runtime — do not port
+index.html            Home
+Club.dc.html           Club
+Academia.dc.html       Academia
+Clases.dc.html         Clases
+StreetFit.dc.html      StreetFit
+Reservas.dc.html       Reservas
+NavBar.dc.html         Nav + shared runtime (reveals, cursor, flip stacks)
+Footer.dc.html         Footer
+mobile.css             Responsive layer
+i18n.js                ES/EN toggle
+streetfit-marquee.js   Marquee loop
+support.js             Prototype runtime — do not port
+.nojekyll               Disables GitHub Pages' default Jekyll build
 ```
 
-Open any `design/*.html` file directly in a browser to see layout, type, color and motion. Images will be missing until you drop in the asset folders listed above.
+Open any `*.dc.html` / `index.html` file directly in a browser to see layout, type, color and motion — or visit the live GitHub Pages preview.
