@@ -2,13 +2,6 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": false,
   "trailingSlash": false,
-  "rewrites": [
-    { "source": "/club", "destination": "/Club.dc.html" },
-    { "source": "/academia", "destination": "/Academia.dc.html" },
-    { "source": "/clases", "destination": "/Clases.dc.html" },
-    { "source": "/streetfit", "destination": "/StreetFit.dc.html" },
-    { "source": "/reservas", "destination": "/Reservas.dc.html" }
-  ],
   "redirects": [
     { "source": "/index.html", "destination": "/", "permanent": true },
     { "source": "/Club.dc.html", "destination": "/club", "permanent": true },

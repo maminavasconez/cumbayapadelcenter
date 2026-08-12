@@ -4,9 +4,9 @@
 Marketing site for **Cumbayá Pádel Center** (Quito, Ecuador): a padel club with an academy, group classes, a physical-conditioning brand (StreetFit) and an online court-booking funnel. Six pages, dark editorial look, all copy in Spanish (Ecuador) with an EN toggle.
 
 ## About the design files
-The files at the repo root are **design references authored as HTML prototypes** — they show the intended look, motion and behavior. They are **not production code to copy verbatim**. The job is to **recreate these screens in the target codebase's own environment** (React/Next, Vue, Astro, etc.) using its established component patterns, routing and asset pipeline. If no codebase exists yet, pick the framework that fits the project (a static-first framework such as Next.js or Astro suits this content site) and implement there.
+The files are **design references authored as HTML prototypes** — they show the intended look, motion and behavior. They are **not production code to copy verbatim**. The job is to **recreate these screens in the target codebase's own environment** (React/Next, Vue, Astro, etc.) using its established component patterns, routing and asset pipeline. If no codebase exists yet, pick the framework that fits the project (a static-first framework such as Next.js or Astro suits this content site) and implement there.
 
-They live at the repo root (not in a `design/` subfolder) so the repo can be served directly by GitHub Pages, Netlify or Vercel for design review — `.nojekyll` disables GitHub's default Jekyll processing, which otherwise renders this README as the homepage and silently drops `_redirects` (Jekyll excludes underscore-prefixed files).
+They live at the repo root — not in a single `design/` subfolder, but each page does sit in its own folder (`club/`, `academia/`, `clases/`, `streetfit/`, `reservas/`) as `index.html`, so the repo is servable as-is with real clean URLs by GitHub Pages, Netlify, Vercel or any static host, with zero rewrite configuration. `.nojekyll` disables GitHub's default Jekyll processing, which otherwise renders this README as the homepage and silently drops `_redirects` (Jekyll excludes underscore-prefixed files).
 
 One mechanic in the prototypes is an authoring-tool artifact and should **not** be ported:
 - `support.js` and the `<x-dc>` / `{{ }}` template syntax — the prototype runtime. It is only here so the files open in a browser. Replace with the target framework's components and props.
@@ -76,14 +76,14 @@ A photo with a flat brand-color card peeking out behind it.
 
 ## Screens
 
-| Screen | File | Purpose |
-|---|---|---|
-| Home | `index.html` | Brand intro, club highlights, photo stacks, sponsors, booking CTA |
-| Club | `Club.dc.html` | Facilities, courts, amenities |
-| Academia | `Academia.dc.html` | Academy programs, certification section (canonical "Carla" block), coach cards, CTA band |
-| Clases | `Clases.dc.html` | Group class formats and schedule |
-| StreetFit | `StreetFit.dc.html` | Conditioning brand: hero, methodology band (blue), athlete grid, marquee |
-| Reservas | `Reservas.dc.html` | 7-step booking walkthrough with numbered screenshots, lime final step |
+| Screen | File | URL | Purpose |
+|---|---|---|---|
+| Home | `index.html` | `/` | Brand intro, club highlights, photo stacks, sponsors, booking CTA |
+| Club | `club/index.html` | `/club` | Facilities, courts, amenities |
+| Academia | `academia/index.html` | `/academia` | Academy programs, certification section (canonical "Carla" block), coach cards, CTA band |
+| Clases | `clases/index.html` | `/clases` | Group class formats and schedule |
+| StreetFit | `streetfit/index.html` | `/streetfit` | Conditioning brand: hero, methodology band (blue), athlete grid, marquee |
+| Reservas | `reservas/index.html` | `/reservas` | 7-step booking walkthrough with numbered screenshots, lime final step |
 
 Shared: `NavBar.dc.html`, `Footer.dc.html`, `mobile.css`, `i18n.js`, `streetfit-marquee.js`.
 
@@ -126,27 +126,30 @@ Each page is a single dark document composed of full-width `<section>`s; two-col
 
 ## URLs y despliegue
 
-El sitio canónico es **`https://cumbayapadelcenter.com`** (sin `www`). Los nombres de archivo `.dc.html` son un artefacto del prototipo: **no son las URLs públicas**. El mapa real es:
+El sitio canónico es **`https://cumbayapadelcenter.com`** (sin `www`), servido en GitHub Pages con dominio propio (ver `CNAME`). `www.cumbayapadelcenter.com` también resuelve — GitHub Pages lo redirige automáticamente al dominio raíz.
 
-| URL pública | Archivo del prototipo |
+Las URLs son limpias **de verdad**, no vía reglas de reescritura de un hosting específico: cada página vive físicamente en su propia carpeta como `index.html` (`club/index.html`, `academia/index.html`…), que es como cualquier servidor estático —GitHub Pages, Netlify, Vercel, S3, lo que sea— resuelve `/club` de forma nativa, sin configuración. `/club` y `/club/` sirven el mismo archivo.
+
+| URL | Archivo físico |
 |---|---|
 | `/` | `index.html` |
-| `/club` | `Club.dc.html` |
-| `/academia` | `Academia.dc.html` |
-| `/clases` | `Clases.dc.html` |
-| `/streetfit` | `StreetFit.dc.html` |
-| `/reservas` | `Reservas.dc.html` |
+| `/club` | `club/index.html` |
+| `/academia` | `academia/index.html` |
+| `/clases` | `clases/index.html` |
+| `/streetfit` | `streetfit/index.html` |
+| `/reservas` | `reservas/index.html` |
 
-El `<link rel="canonical">` de cada página ya apunta a la URL limpia. Para que el hosting las sirva se incluyen `_redirects` (Netlify) y `vercel.json` (Vercel), que además:
+**`<base href="/">`** en el `<head>` de cada página (y de `NavBar.dc.html`/`Footer.dc.html`) es lo que permite que las páginas vivan a distinta profundidad de carpeta sin romper nada: todas las rutas relativas del documento —imágenes, `mobile.css`, `i18n.js`, y el `fetch()` que `support.js` usa para traer los componentes `NavBar`/`Footer`— se resuelven contra la raíz del sitio en vez de contra la carpeta del documento actual. Sin este tag, una página en `/club/` intentaría cargar `fotos/...` como `/club/fotos/...` (404) y el `fetch('./NavBar.dc.html')` de `support.js` como `/club/NavBar.dc.html` (404) — es la pieza que hace que mover páginas a carpetas no rompa todo lo demás.
 
-- fuerzan un solo host (301 de `www` a sin `www`),
-- redirigen 301 cada `.dc.html` y `/index.html` a su URL limpia, para que no existan dos URLs indexables con el mismo contenido,
-- normalizan la barra final,
-- sirven `404.html` con **status 404 real** (no un soft 404).
+El `<link rel="canonical">` de cada página apunta a su URL limpia. `_redirects` (Netlify) y `vercel.json` (Vercel) cubren lo que un archivo estático no resuelve por sí solo:
 
-`NavBar.dc.html` y `Footer.dc.html` son componentes, no páginas: llevan `noindex` y están bloqueados en `robots.txt`.
+- un solo host canónico (301 de `www` a sin `www`, en Netlify vía `_redirects`; en GitHub Pages, automático una vez configurado el `CNAME`),
+- 301 de los nombres de archivo viejos del prototipo (`Club.dc.html`, etc. — ya no existen, se movieron a `club/index.html`) por si algo quedó enlazado con ellos,
+- `404.html` con **status 404 real** (no un soft 404).
 
-**Enlaces internos.** Dentro del prototipo los enlaces siguen apuntando a `Club.dc.html` etc., para que el bundle se pueda abrir con doble clic. En producción esas rutas hacen 301 a la URL limpia, así que funcionan igual. **La app final debe emitir directamente `/club`, `/academia`…** y ahorrarse el salto.
+`NavBar.dc.html` y `Footer.dc.html` son componentes, no páginas: llevan `noindex` y están bloqueados en `robots.txt`. Se quedan en la raíz (no tienen su propia carpeta) porque nadie navega a ellos directamente — `support.js` los trae vía `fetch()` para inyectarlos en cada página.
+
+**Enlaces internos.** Los `<a href>` del nav, footer y CTAs cruzados usan directamente la ruta limpia absoluta (`/club`, `/academia`…) — no hay redirección de por medio en la navegación normal dentro del sitio.
 
 ## SEO
 
@@ -211,19 +214,20 @@ Fonts are Google Fonts: `Instrument Serif` (400, 400 italic) and `Archivo` (400/
 
 ## Files in this bundle
 ```
-index.html            Home
-Club.dc.html           Club
-Academia.dc.html       Academia
-Clases.dc.html         Clases
-StreetFit.dc.html      StreetFit
-Reservas.dc.html       Reservas
-NavBar.dc.html         Nav + shared runtime (reveals, cursor, flip stacks)
-Footer.dc.html         Footer
-mobile.css             Responsive layer
-i18n.js                ES/EN toggle
-streetfit-marquee.js   Marquee loop
-support.js             Prototype runtime — do not port
+index.html             Home            /
+club/index.html        Club            /club
+academia/index.html    Academia        /academia
+clases/index.html      Clases          /clases
+streetfit/index.html   StreetFit       /streetfit
+reservas/index.html    Reservas        /reservas
+NavBar.dc.html          Nav + shared runtime (reveals, cursor, flip stacks) — fetched by every page
+Footer.dc.html          Footer — fetched by every page
+mobile.css              Responsive layer
+i18n.js                 ES/EN toggle
+streetfit-marquee.js    Marquee loop
+support.js              Prototype runtime — do not port
+CNAME                   Custom domain for GitHub Pages
 .nojekyll               Disables GitHub Pages' default Jekyll build
 ```
 
-Open any `*.dc.html` / `index.html` file directly in a browser to see layout, type, color and motion — or visit the live GitHub Pages preview.
+Opening a page file directly from disk (double-click) won't work anymore now that `<base href="/">` pins every relative URL to the site root — that only resolves correctly when served from an actual web server. Run any static file server from the repo root (`python3 -m http.server`, `npx serve`, etc.) or visit the live site.
