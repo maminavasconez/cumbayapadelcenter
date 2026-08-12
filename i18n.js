@@ -116,6 +116,9 @@
     "Tu cancha te espera en Cumbayá Pádel Center. Nos vemos en el club.": "Your court is waiting at Cumbayá Pádel Center. See you at the club.",
     "Tu cancha te": "Your court", "espera.": "awaits.",
     "RESERVAR POR WHATSAPP": "BOOK VIA WHATSAPP", "Te respondemos y coordinamos tu horario al instante.": "We'll reply and set your time instantly.",
+    "REVIVE CADA PUNTO": "RELIVE EVERY POINT", "¿Quieres ver tus": "Want to watch your", "jugadas?": "games?",
+    "Con Beelup grabas y repasas tus partidos en video, punto por punto. Revive esa jugada ganadora o encuentra qué mejorar para el próximo.": "With Beelup you record and replay your matches on video, point by point. Relive that winning shot or find what to improve for next time.",
+    "VER EN BEELUP": "WATCH ON BEELUP",
     // ---- Clases ----
     "CLASES PARTICULARES": "PRIVATE CLASSES", "Encuentra tu": "Find your", "coach ideal.": "ideal coach.",
     "Clases uno a uno, en pareja o en grupo, con entrenadores certificados. Elige el coach, el horario y la modalidad que mejor se adapten a tu nivel.": "One-on-one, pair or group classes with certified coaches. Choose the coach, time and format that best fit your level.",
