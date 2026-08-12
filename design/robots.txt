@@ -1,0 +1,12 @@
+# Cumbayá Pádel Center — https://cumbayapadelcenter.com
+User-agent: *
+Allow: /
+
+# Componentes del prototipo: se inyectan dentro de las páginas, no son páginas.
+Disallow: /NavBar.dc.html
+Disallow: /Footer.dc.html
+
+# CSS, JS, fuentes e imágenes quedan permitidos a propósito: bloquearlos
+# impediría que Google renderice y evalúe las páginas.
+
+Sitemap: https://cumbayapadelcenter.com/sitemap.xml

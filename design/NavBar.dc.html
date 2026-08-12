@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<link rel="icon" type="image/png" href="favicon.png">
+<title>Cumbayá Pádel Center</title>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="mobile.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Archivo:wght@400;500;600;700&family=Archivo+Expanded:wght@500;600;700&display=swap" rel="stylesheet">
+  <script src="i18n.js"></script>
+  <style>
+    html, body { margin: 0; padding: 0; background: #070707; }
+    body, a, button, input, textarea { cursor: none; }
+    body { font-family: 'Archivo', sans-serif; }
+    a { color: inherit; text-decoration: none; }
+    a:hover { color: #D9007E; }
+    ::selection { background: #D9007E; color: #FFFFFF; }
+    @keyframes rise { from { opacity: 0; transform: translateY(34px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes spinSlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  </style>
+</helmet>
+
+<a href="#contenido" class="cpc-skip">Saltar al contenido</a>
+<nav ref="{{ navRef }}" aria-label="Principal" style="{{ navStyle }}">
+  <a href="index.html" style="display: flex; align-items: center; white-space: nowrap; flex-shrink: 0; margin-right: 32px; flex: 0 0 auto;">
+    <img src="cpc-logo.png" alt="Cumbayá Pádel Center" style="height: 38px; width: auto; display: block;" width="285" height="74" loading="eager" fetchpriority="high" decoding="async">
+  </a>
+  <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+    <button type="button" aria-label="Menú" aria-expanded="{{ menuExpanded }}" aria-controls="cpc-mobile-menu" onClick="{{ toggleMenu }}" style="cursor: none; background: transparent; border: none; padding: 0; width: 26px; height: 20px; position: relative; flex-shrink: 0;">
+      <span style="{{ line1Style }}"></span>
+      <span style="{{ line2Style }}"></span>
+      <span style="{{ line3Style }}"></span>
+    </button>
+  </sc-if>
+  <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+    <div style="display: flex; align-items: center; gap: clamp(14px, 2vw, 30px); font-size: 11px; letter-spacing: 0.14em; font-weight: 500; color: rgba(242,240,235,0.72); flex: 1 1 340px; flex-wrap: wrap; justify-content: flex-end; row-gap: 12px;">
+      <a href="Club.dc.html">CLUB</a>
+      <a href="Academia.dc.html">ACADEMIA</a>
+      <a href="Clases.dc.html">CLASES</a>
+      <a href="StreetFit.dc.html">STREETFIT</a>
+      <a href="Reservas.dc.html">RESERVAR</a>
+      <button id="cpc-lang" data-cpc-lang type="button" style="cursor: none; background: transparent; color: rgba(242,240,235,0.72); border: 1px solid rgba(242,240,235,0.3); border-radius: 999px; padding: 8px 15px; font-family: 'Archivo', sans-serif; font-size: 11px; letter-spacing: 0.14em; font-weight: 700; transition: color 0.25s, border-color 0.25s;" style-hover="color: #FFFFFF; border-color: #FFFFFF;">EN</button>
+      <a href="https://wa.me/593995738363" style="color: #FFFFFF; background: #D9007E; padding: 11px 22px; border-radius: 999px; letter-spacing: 0.12em; font-weight: 700; transition: transform 0.25s; white-space: nowrap;" style-hover="transform: translateY(-2px); color: #FFFFFF;">CONTACTO</a>
+    </div>
+  </sc-if>
+</nav>
+<div style="{{ navSpacerStyle }}"></div>
+
+<div id="cpc-mobile-menu" style="{{ overlayStyle }}">
+  <div style="display: flex; flex-direction: column; align-items: center; gap: 26px; padding: 104px 24px 48px;">
+    <a href="Club.dc.html" onClick="{{ closeMenu }}" style="{{ mobileLinkStyle }}">CLUB</a>
+    <a href="Academia.dc.html" onClick="{{ closeMenu }}" style="{{ mobileLinkStyle }}">ACADEMIA</a>
+    <a href="Clases.dc.html" onClick="{{ closeMenu }}" style="{{ mobileLinkStyle }}">CLASES</a>
+    <a href="StreetFit.dc.html" onClick="{{ closeMenu }}" style="{{ mobileLinkStyle }}">STREETFIT</a>
+    <a href="Reservas.dc.html" onClick="{{ closeMenu }}" style="{{ mobileLinkStyle }}">RESERVAR</a>
+    <div style="display: flex; align-items: center; gap: 16px; margin-top: 14px;">
+      <button id="cpc-lang-mobile" data-cpc-lang type="button" style="cursor: none; background: transparent; color: rgba(242,240,235,0.72); border: 1px solid rgba(242,240,235,0.3); border-radius: 999px; padding: 10px 18px; font-family: 'Archivo', sans-serif; font-size: 12px; letter-spacing: 0.14em; font-weight: 700;">EN</button>
+      <a href="https://wa.me/593995738363" onClick="{{ closeMenu }}" style="color: #FFFFFF; background: #D9007E; padding: 13px 26px; border-radius: 999px; letter-spacing: 0.12em; font-weight: 700; font-size: 12px;">CONTACTO</a>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1280, &quot;height&quot;: 76}}">
+class Component extends DCLogic {
+  state = { isMobile: false, menuOpen: false, navH: 76 };
+  navRef = React.createRef();
+
+  componentDidMount() {
+    const mq = window.matchMedia('(max-width: 900px)');
+    const update = () => this.setState((s) => ({ isMobile: mq.matches, menuOpen: mq.matches ? s.menuOpen : false }));
+    update();
+    mq.addEventListener('change', update);
+
+    // Esc cierra el menú móvil.
+    this._onKey = (e) => { if (e.key === 'Escape') this.setState({ menuOpen: false }); };
+    document.addEventListener('keydown', this._onKey);
+
+    // El nav va fijo: `sticky` no funciona porque su contenedor de montaje
+    // tiene exactamente la altura del nav. Un spacer conserva el flujo.
+    const measure = () => {
+      const el = this.navRef.current;
+      if (el) {
+        const h = Math.round(el.getBoundingClientRect().height);
+        if (h && h !== this.state.navH) this.setState({ navH: h });
+      }
+    };
+    measure();
+    if (window.ResizeObserver && this.navRef.current) {
+      this._ro = new ResizeObserver(measure);
+      this._ro.observe(this.navRef.current);
+    }
+    window.addEventListener('resize', measure);
+
+    if (window.__cpcRuntime) return;
+    window.__cpcRuntime = true;
+
+    const coarse = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Tennis ball cursor (pointer devices only)
+    if (!coarse && !reduced) this._ballCursor();
+    this._revealRuntime(coarse, reduced);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    // Bloqueo de scroll del fondo mientras el overlay está abierto.
+    // Va en <body>; `html` ya es el contenedor de scroll (ver mobile.css).
+    if (prevState && prevState.menuOpen === this.state.menuOpen) return;
+    document.body.style.overflow = this.state.menuOpen ? 'hidden' : '';
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this._onKey);
+    document.body.style.overflow = '';
+    if (this._ro) this._ro.disconnect();
+  }
+
+  _ballCursor() {
+    const cur = document.createElement('div');
+    cur.id = 'cpc-ball-cursor';
+    cur.style.cssText = 'position:fixed;top:0;left:0;z-index:400;width:28px;height:28px;pointer-events:none;will-change:transform;';
+    cur.innerHTML = '<svg viewBox="0 0 28 28" width="28" height="28" style="display:block;transition:transform .25s ease;filter:drop-shadow(0 2px 6px rgba(0,0,0,.5))"><circle cx="14" cy="14" r="13" fill="#BEEB1F"></circle><path d="M 5 2.5 C 12 9 12 19 5 25.5" fill="none" stroke="#FFFFFF" stroke-width="1.6"></path><path d="M 23 2.5 C 16 9 16 19 23 25.5" fill="none" stroke="#FFFFFF" stroke-width="1.6"></path></svg>';
+    document.body.appendChild(cur);
+    const inner = cur.firstChild;
+    let tx = window.innerWidth / 2, ty = window.innerHeight / 3, x = tx, y = ty;
+    window.addEventListener('mousemove', (e) => { tx = e.clientX; ty = e.clientY; });
+    window.addEventListener('mouseover', (e) => {
+      inner.style.transform = e.target.closest('a, button, image-slot, input, textarea') ? 'scale(1.7)' : 'scale(1)';
+    });
+    const loop = () => {
+      x += (tx - x) * 0.2; y += (ty - y) * 0.2;
+      cur.style.transform = 'translate(' + (x - 14) + 'px,' + (y - 14) + 'px) rotate(' + (x * 0.6) + 'deg)';
+      requestAnimationFrame(loop);
+    };
+    loop();
+  }
+
+  _revealRuntime(coarse, reduced) {
+    // Reveal + flip runtime (picks up nodes as they stream in)
+    const show = (el) => { el.style.opacity = '1'; el.style.transform = 'none'; };
+
+    // `threshold: 0` a propósito. Con un umbral por ratio, un bloque más alto
+    // que ~8x el viewport nunca puede alcanzarlo: la tarjeta de entrenadores
+    // mide 3641px y en un teléfono en horizontal el ratio máximo posible queda
+    // por debajo de 0.12, así que el contenido se quedaba invisible para
+    // siempre. Con 0 basta un pixel visible.
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((en) => {
+        if (en.isIntersecting) { show(en.target); io.unobserve(en.target); }
+      });
+    }, { threshold: 0, rootMargin: '0px 0px -8% 0px' });
+
+    // Red de seguridad: si el observer no llega a disparar (nodos que el
+    // runtime reemplaza a mitad del stream, bfcache, etc.), nada se queda
+    // oculto. El contenido siempre gana sobre la animación.
+    const failsafe = () => {
+      document.querySelectorAll('[data-rv]').forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight && r.bottom > 0) show(el);
+      });
+    };
+    window.addEventListener('scroll', () => {
+      clearTimeout(this._fsT);
+      this._fsT = setTimeout(failsafe, 400);
+    }, { passive: true });
+    setTimeout(failsafe, 2500);
+
+    const initFlip = (box) => {
+      const faces = box.querySelectorAll('[data-flip-face]');
+      const count = box.querySelector('[data-flip-count]');
+      if (!faces.length) return;
+      let idx = 0, acc = 0, lastX = null, lastY = null, busy = false;
+      faces.forEach((f, i) => {
+        f.style.transition = 'transform 0.55s cubic-bezier(.22,1,.36,1), opacity 0.35s ease';
+        f.style.backfaceVisibility = 'hidden';
+        f.style.transform = i === 0 ? 'rotateY(0deg)' : 'rotateY(180deg)';
+        f.style.opacity = i === 0 ? '1' : '0';
+        f.style.pointerEvents = i === 0 ? 'auto' : 'none';
+      });
+      const show = (n) => {
+        faces.forEach((f, i) => {
+          f.style.transform = i === n ? 'rotateY(0deg)' : 'rotateY(-180deg)';
+          f.style.opacity = i === n ? '1' : '0';
+          f.style.pointerEvents = i === n ? 'auto' : 'none';
+        });
+        if (count) count.textContent = (n + 1) + ' / ' + faces.length;
+      };
+      if (count) count.textContent = '1 / ' + faces.length;
+      const advance = () => { idx = (idx + 1) % faces.length; show(idx); };
+      if (coarse) {
+        // Touch: tap to flip, plus a gentle auto-rotation while on screen
+        box.style.cursor = 'pointer';
+        box.addEventListener('click', advance);
+        if (reduced) return; // sin rotación automática
+        let timer = null;
+        const vis = new IntersectionObserver((es) => {
+          es.forEach((en) => {
+            if (en.isIntersecting && !timer) timer = setInterval(advance, 3600);
+            else if (!en.isIntersecting && timer) { clearInterval(timer); timer = null; }
+          });
+        }, { threshold: 0.35 });
+        vis.observe(box);
+        return;
+      }
+      box.addEventListener('mousemove', (e) => {
+        if (lastX !== null) acc += Math.abs(e.clientX - lastX) + Math.abs(e.clientY - lastY);
+        lastX = e.clientX; lastY = e.clientY;
+        if (acc > 240 && !busy) {
+          acc = 0; busy = true;
+          advance();
+          setTimeout(() => { busy = false; }, 620);
+        }
+      });
+      box.addEventListener('mouseleave', () => { lastX = null; lastY = null; acc = 0; });
+    };
+
+    const scan = () => {
+      document.querySelectorAll('[data-reveal]:not([data-rv])').forEach((el) => {
+        el.setAttribute('data-rv', '1');
+        // Con reduced-motion no se oculta nada: el contenido entra ya visible.
+        if (reduced) return;
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(46px)';
+        el.style.transition = 'opacity 0.9s cubic-bezier(.22,1,.36,1), transform 0.9s cubic-bezier(.22,1,.36,1)';
+        io.observe(el);
+      });
+      document.querySelectorAll('[data-flip]:not([data-fl])').forEach((box) => {
+        box.setAttribute('data-fl', '1');
+        initFlip(box);
+      });
+    };
+    scan();
+    let mt = null;
+    const mo = new MutationObserver(() => { clearTimeout(mt); mt = setTimeout(scan, 150); });
+    mo.observe(document.body, { childList: true, subtree: true });
+  }
+
+  renderVals() {
+    const open = this.state.menuOpen;
+    const lineBase = 'position:absolute;left:0;width:26px;height:2px;background:#F2F0EB;border-radius:2px;transition:all .3s ease;';
+    return {
+      isMobile: this.state.isMobile,
+      isDesktop: !this.state.isMobile,
+      menuExpanded: open ? 'true' : 'false',
+      navRef: this.navRef,
+      navSpacerStyle: 'height: ' + this.state.navH + 'px;',
+      navStyle: 'position: fixed; top: 0; left: 0; right: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; row-gap: 14px; padding: '
+        + (this.state.isMobile ? '18px' : '16px') + ' clamp(18px, 4vw, 48px) 16px; background: rgba(7,7,7,0.8); backdrop-filter: blur(18px); border-bottom: 1px solid rgba(242,240,235,0.08); color: #F2F0EB; font-family: \'Archivo\', sans-serif;',
+      toggleMenu: () => this.setState((s) => ({ menuOpen: !s.menuOpen })),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      line1Style: lineBase + (open ? 'top:9px;transform:rotate(45deg);' : 'top:0;transform:rotate(0);'),
+      line2Style: lineBase + (open ? 'top:9px;opacity:0;' : 'top:9px;opacity:1;'),
+      line3Style: lineBase + (open ? 'top:9px;transform:rotate(-45deg);' : 'top:18px;transform:rotate(0);'),
+      overlayStyle: 'position:fixed;inset:0;z-index:45;background:#070707;overflow-y:auto;'
+        + (this.state.isMobile ? 'display:block;' : 'display:none;')
+        + (open ? 'opacity:1;pointer-events:auto;transform:translateY(0);' : 'opacity:0;pointer-events:none;transform:translateY(-16px);')
+        + 'transition:opacity .3s ease, transform .3s ease;',
+      mobileLinkStyle: 'font-family:Archivo,sans-serif;font-weight:700;font-size:28px;letter-spacing:0.06em;color:#F2F0EB;padding: 8px 0;'
+    };
+  }
+}
+</script>
+</body>
+</html>

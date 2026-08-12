@@ -1,0 +1,32 @@
+# Netlify — URLs limpias sobre los archivos del prototipo.
+# Los canonical de cada página apuntan a estas rutas, así que el hosting
+# tiene que servirlas. En Vercel usa vercel.json (mismo mapeo).
+
+# 1. Un solo host canónico (evita duplicados www / no-www).
+https://www.cumbayapadelcenter.com/*   https://cumbayapadelcenter.com/:splat   301!
+
+# 2. URLs limpias -> archivo real (rewrite interno, sin cambiar la barra).
+/club          /Club.dc.html        200
+/academia      /Academia.dc.html    200
+/clases        /Clases.dc.html      200
+/streetfit     /StreetFit.dc.html   200
+/reservas      /Reservas.dc.html    200
+
+# 3. Los nombres de archivo del prototipo redirigen a la URL limpia,
+#    para que no existan dos URLs indexables con el mismo contenido.
+/index.html        /            301!
+/Club.dc.html      /club        301!
+/Academia.dc.html  /academia    301!
+/Clases.dc.html    /clases      301!
+/StreetFit.dc.html /streetfit   301!
+/Reservas.dc.html  /reservas    301!
+
+# 4. Variantes con barra final -> sin barra (una sola forma canónica).
+/club/         /club        301!
+/academia/     /academia    301!
+/clases/       /clases      301!
+/streetfit/    /streetfit   301!
+/reservas/     /reservas    301!
+
+# 5. 404 real (Netlify devuelve status 404 con esta página).
+/*             /404.html    404

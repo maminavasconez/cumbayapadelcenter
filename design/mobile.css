@@ -1,0 +1,169 @@
+/* Cumbayá Pádel Center — mobile layer.
+   Only what cannot live inline: media queries + pointer-capability rules. */
+
+html { -webkit-text-size-adjust: 100%; }
+
+/* Salto al contenido: invisible hasta que recibe foco de teclado. Es el
+   primer tabulable de la página, por delante del nav fijo. */
+.cpc-skip {
+  position: absolute; left: 12px; top: -100px; z-index: 100;
+  background: #BEEB1F; color: #070707; padding: 15px 22px;
+  border-radius: 999px; font: 700 12px/1 'Archivo', sans-serif;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  min-height: 44px; box-sizing: border-box;
+  display: inline-flex; align-items: center;
+  transition: top 0.2s ease;
+}
+.cpc-skip:focus { top: 12px; color: #070707; outline: 2px solid #070707; outline-offset: 2px; }
+
+/* El cursor personalizado oculta el cursor real; el foco de teclado debe
+   seguir siendo visible para quien navega sin ratón. */
+:focus-visible { outline: 2px solid #BEEB1F; outline-offset: 3px; }
+
+/* Texto solo para lectores de pantalla y buscadores: mantiene la jerarquía
+   de encabezados donde el diseño no muestra un título visible. */
+.cpc-sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0;
+}
+/* overflow-x sólo en <html>: ponerlo en <body> convierte al body en contenedor
+   de scroll y rompe el `position: sticky` del nav en móvil. */
+html { overflow-x: hidden; }
+html, body { max-width: 100%; }
+img, svg, video, iframe { max-width: 100%; }
+input, textarea, select { box-sizing: border-box; width: 100%; min-width: 0; max-width: 100%; }
+
+/* Touch devices: give back the real cursor, hide the tennis-ball pointer */
+@media (hover: none), (pointer: coarse) {
+  body, a, button, input, textarea, select, label { cursor: auto !important; }
+  #cpc-ball-cursor { display: none !important; }
+}
+
+/* Respetar la preferencia del sistema: sin entradas animadas, sin marquee,
+   sin cursor de pelota. El contenido queda visible, no oculto. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    /* también el delay: si no, la cortinilla de intro del Home
+       seguiría tapando la página 2.7s antes de desaparecer. */
+    animation-delay: 0s !important;
+    transition-duration: 0.001ms !important;
+    transition-delay: 0s !important;
+    scroll-behavior: auto !important;
+  }
+  #cpc-ball-cursor { display: none !important; }
+  [data-marquee-track] { transform: none !important; }
+}
+
+@media (max-width: 900px) {
+  /* Two-column splits stack */
+  [style*="1.1fr 0.9fr"], [style*="0.9fr 1.1fr"],
+  [style*="1.05fr 0.95fr"], [style*="0.95fr 1.05fr"],
+  [style*="1.15fr 1fr"], [style*="1fr 1.15fr"],
+  [style*="1.7fr 0.8fr"], [style*="0.8fr 1.7fr"],
+  [style*="1fr 400px"], [style*="400px 1fr"],
+  [style*="1fr 380px"], [style*="380px 1fr"],
+  [style*="150px 1fr auto"] { grid-template-columns: 1fr !important; }
+
+  [style*="150px 1fr auto"] { gap: 12px !important; padding-left: 0 !important; padding-right: 0 !important; }
+
+  /* Pasos alternados (Reservas): al apilarse, el número y el texto van
+     SIEMPRE antes de su captura — si no, los pasos pares se leen al revés. */
+  [style*="400px 1fr"] > [style*="order: 1"] { order: 2 !important; }
+  [style*="400px 1fr"] > [style*="order: 2"] { order: 1 !important; }
+
+  /* Aire uniforme entre las columnas apiladas (texto ↔ foto) */
+  [style*="1.1fr 0.9fr"], [style*="0.9fr 1.1fr"],
+  [style*="1.05fr 0.95fr"], [style*="0.95fr 1.05fr"],
+  [style*="1.15fr 1fr"], [style*="1fr 1.15fr"],
+  [style*="1.7fr 0.8fr"], [style*="0.8fr 1.7fr"] { gap: 48px !important; }
+
+  /* Card grids go to two-up */
+  [style*="repeat(3, 1fr)"], [style*="repeat(4, 1fr)"], [style*="repeat(5, 1fr)"] { grid-template-columns: repeat(2, 1fr) !important; }
+
+  /* Fixed-percentage card widths (coach cards) */
+  [style*="calc(25% - 18px)"] { width: calc(50% - 12px) !important; }
+
+  /* Tall decorative media boxes */
+  [style*="min-height: 620px"] { min-height: 78vw !important; }
+  [style*="height: 460px"] { height: 80vw !important; min-height: 280px; max-height: 460px; }
+  [style*="inset: 70px 26px 40px 0"] { inset: 24px 16px 12px 0px !important; }
+  [style*="inset: 56px 0px 54px 26px"], [style*="inset: 56px 0 54px 26px"] { inset: 12px 0px 24px 16px !important; }
+
+  /* Acentos de color "diseño Carla": el rebase no debe tocar el borde ni la sección siguiente */
+  [style*="inset: 22px -22px -22px 22px"] { inset: 14px -2px -8px 14px !important; }
+  [style*="inset: 24px -18px -18px 24px"] { inset: 14px -2px -8px 14px !important; }
+  [style*="inset: 22px 18px -22px 22px"] { inset: 14px 6px -10px 14px !important; }
+  [style*="inset: 40px -14px 22px 30px"] { inset: 24px -2px 14px 18px !important; }
+  [style*="inset: 20px 24px 0px 0px"], [style*="inset: 20px 24px 0 0"] { inset: 10px 16px 14px 0px !important; }
+  [style*="min-height: 480px"] { min-height: 78vw !important; }
+  [data-hero-media] { min-height: 0 !important; height: 80vw !important; max-height: 460px !important; }
+  header[style*="100vh"] { min-height: 0 !important; gap: 24px !important; padding-bottom: 64px !important; }
+
+  /* Oversized corner decorations.
+     Descendiente, no hijo directo: en Reservas el paso 07 las lleva dentro
+     de un div y con `section >` quedaban a tamaño desktop sobre el texto. */
+  section svg[style*="position: absolute"],
+  section img[alt=""][style*="position: absolute"] { width: 230px !important; height: 230px !important; }
+}
+
+@media (max-width: 640px) {
+  [style*="repeat(2, 1fr)"], [style*="repeat(3, 1fr)"], [style*="repeat(4, 1fr)"], [style*="repeat(5, 1fr)"] { grid-template-columns: 1fr !important; }
+  [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
+
+  /* Heading + "VER TODO →" rows wrap instead of squeezing the headline */
+  [style*="justify-content: space-between"][style*="align-items: flex-end"] { flex-wrap: wrap !important; gap: 18px !important; }
+  [style*="calc(25% - 18px)"] { width: 100% !important; max-width: 340px; }
+  [style*="calc(33.333% - 16px)"], [style*="calc(33% - 16px)"] { width: 100% !important; max-width: 340px; }
+
+  /* Type scale: keep hierarchy, guarantee fit */
+  h1 { font-size: clamp(34px, 11vw, 52px) !important; }
+  h2 { font-size: clamp(30px, 9.4vw, 46px) !important; }
+  h3 { font-size: clamp(22px, 6.6vw, 30px) !important; }
+
+  /* Big stat numbers + wide gaps */
+  [style*="font-size: 52px"] { font-size: 40px !important; }
+  [style*="gap: 56px"] { gap: 28px !important; }
+  [style*="gap: 70px"] { gap: 40px !important; }
+  [style*="gap: 64px"] { gap: 32px !important; }
+
+  /* Ritmo vertical consistente entre secciones */
+  section:not([style*="padding: 0"]) { padding-top: 64px !important; padding-bottom: 64px !important; }
+
+  /* Secciones CTA (diseño Juanfi): más aire para que respiren los íconos de esquina */
+  section[style*="text-align: center"][style*="overflow: hidden"] { padding-top: 92px !important; padding-bottom: 92px !important; }
+  section svg[style*="position: absolute"],
+  section img[alt=""][style*="position: absolute"] { width: 140px !important; height: 140px !important; opacity: 0.9 !important; }
+  /* Los offsets fueron escritos para arte de 340–560px: reajustarlos al tamaño móvil.
+     Los íconos quedan como acento de esquina — nunca detrás del texto. */
+  section svg[style*="right: -"], section img[style*="right: -"] { right: -56px !important; }
+  section svg[style*="left: -"], section img[style*="left: -"] { left: -56px !important; }
+  section svg[style*="top: -"], section img[style*="top: -"] { top: -56px !important; }
+  section svg[style*="bottom: -"], section img[style*="bottom: -"] { bottom: -56px !important; }
+
+  /* Bordes de sección con padding inferior 0 heredado del desktop */
+  section[style*="padding: 0px"], section[style*="padding: 0 "] { padding-bottom: 64px !important; }
+
+  /* Botones pill: proporción móvil */
+  a[style*="border-radius: 999px"], button[style*="border-radius: 999px"] {
+    padding-top: 14px !important; padding-bottom: 14px !important;
+    padding-left: 26px !important; padding-right: 26px !important;
+    font-size: 12px !important; letter-spacing: 0.1em !important;
+  }
+
+  /* Comfortable tap targets */
+  nav a, nav button, a[style*="border-radius: 999px"], button[style*="border-radius: 999px"] { min-height: 44px; box-sizing: border-box; }
+  a[style*="border-radius: 999px"], button[style*="border-radius: 999px"] { display: inline-flex !important; align-items: center; justify-content: center; }
+
+  /* Los enlaces de texto (footer, "VER TODO →", redes) miden 13–26px de alto.
+     Se extiende el área táctil a 44px con un pseudo-elemento para no mover
+     ni un pixel del layout ni del subrayado. */
+  footer a, a[style*="border-bottom: 2px solid"],
+  a[aria-label="Instagram"], a[aria-label="WhatsApp"] { position: relative; }
+  footer a::after, a[style*="border-bottom: 2px solid"]::after,
+  a[aria-label="Instagram"]::after, a[aria-label="WhatsApp"]::after {
+    content: ""; position: absolute; left: 0; right: 0; top: 50%;
+    height: 44px; min-height: 100%; transform: translateY(-50%);
+  }
+}
