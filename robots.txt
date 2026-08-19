@@ -2,9 +2,12 @@
 User-agent: *
 Allow: /
 
-# Componentes del prototipo: se inyectan dentro de las páginas, no son páginas.
-Disallow: /NavBar.dc.html
-Disallow: /Footer.dc.html
+# NavBar.dc.html y Footer.dc.html son componentes que support.js inyecta en
+# cada página; no son páginas navegables. Llevan <meta name="robots"
+# content="noindex"> y a propósito NO se bloquean aquí: un Disallow impediría
+# que Google los rastree y por tanto que llegue a leer ese noindex, dejándolos
+# potencialmente listados como URL bloqueada. Permitir el rastreo es lo que
+# hace que el noindex se respete de verdad.
 
 # CSS, JS, fuentes e imágenes quedan permitidos a propósito: bloquearlos
 # impediría que Google renderice y evalúe las páginas.

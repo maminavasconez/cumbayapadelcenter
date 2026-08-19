@@ -1,0 +1,21 @@
+# Netlify — cabeceras de seguridad.
+#
+# IMPORTANTE: GitHub Pages (donde está desplegado hoy) NO permite cabeceras
+# personalizadas, así que este archivo lo ignora por completo y las auditorías
+# seguirán marcando esos avisos mientras el hosting sea GitHub Pages. Estas
+# reglas se aplican solas en cuanto el sitio se mueva a Netlify; el equivalente
+# para Vercel vive en vercel.json.
+
+/*
+  X-Frame-Options: SAMEORIGIN
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+  Content-Security-Policy: default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com; frame-src https://maps.google.com https://www.google.com; connect-src 'self'; base-uri 'self'; form-action 'self'
+
+/fotos/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/og/*
+  Cache-Control: public, max-age=31536000, immutable
