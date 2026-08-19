@@ -1,39 +1,139 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://cumbayapadelcenter.com/</loc>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-08-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://cumbayapadelcenter.com/og/home.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://cumbayapadelcenter.com/fotos/home-cpc-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://cumbayapadelcenter.com/fotos/home-cpc-hero-2.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://cumbayapadelcenter.com/fotos/home-cpc-hero-3.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://cumbayapadelcenter.com/fotos/home-cpc-hero-4.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://cumbayapadelcenter.com/fotos/home-cpc-hero-5.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://cumbayapadelcenter.com/fotos/home-cpc-familia.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://cumbayapadelcenter.com/club</loc>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-08-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://cumbayapadelcenter.com/og/club.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://cumbayapadelcenter.com/fotos/sn-club.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://cumbayapadelcenter.com/court-lime.svg</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://cumbayapadelcenter.com/academia</loc>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-08-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://cumbayapadelcenter.com/og/academia.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://cumbayapadelcenter.com/fotos/ac-hero-1.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://cumbayapadelcenter.com/fotos/ac-hero-2.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://cumbayapadelcenter.com/fotos/ac-hero-3.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://cumbayapadelcenter.com/fotos/ac-hero-4.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://cumbayapadelcenter.com/fotos/academia-cert-foto-v2.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://cumbayapadelcenter.com/clases</loc>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-08-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://cumbayapadelcenter.com/og/clases.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://cumbayapadelcenter.com/dolar-fucsia.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://cumbayapadelcenter.com/court-lime.svg</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://cumbayapadelcenter.com/streetfit</loc>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-08-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://cumbayapadelcenter.com/og/streetfit.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://cumbayapadelcenter.com/fotos/sf-hero-1.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://cumbayapadelcenter.com/fotos/sf-hero-2.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://cumbayapadelcenter.com/fotos/sf-hero-3.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://cumbayapadelcenter.com/fotos/sf-hero-4.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://cumbayapadelcenter.com/pesa-lime.svg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://cumbayapadelcenter.com/fotos/sf-quienes-1.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://cumbayapadelcenter.com/reservas</loc>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-08-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://cumbayapadelcenter.com/og/reservas.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://cumbayapadelcenter.com/paso-1-descarga.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://cumbayapadelcenter.com/paso-2-login.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://cumbayapadelcenter.com/paso-3-club.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://cumbayapadelcenter.com/paso-4-horario.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://cumbayapadelcenter.com/paso-5-cancha.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://cumbayapadelcenter.com/paso-6-paga.jpg</image:loc>
+    </image:image>
   </url>
 </urlset>
