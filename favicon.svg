@@ -1,10 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-<!-- Fondo tinta: sin él, las costuras blancas de la pelota desaparecen sobre
-     el fondo blanco que Google usa en sus resultados de búsqueda. -->
-<rect width="64" height="64" rx="14" fill="#070707"/>
-<g transform="translate(7 7) scale(1.7857)">
-  <circle cx="14" cy="14" r="13" fill="#BEEB1F"/>
-  <path d="M 5 2.5 C 12 9 12 19 5 25.5" fill="none" stroke="#FFFFFF" stroke-width="1.9" stroke-linecap="round"/>
-  <path d="M 23 2.5 C 16 9 16 19 23 25.5" fill="none" stroke="#FFFFFF" stroke-width="1.9" stroke-linecap="round"/>
-</g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28">
+<circle cx="14" cy="14" r="13" fill="#BEEB1F"/>
+<path d="M 5 2.5 C 12 9 12 19 5 25.5" fill="none" stroke="#FFFFFF" stroke-width="1.7" stroke-linecap="round"/>
+<path d="M 23 2.5 C 16 9 16 19 23 25.5" fill="none" stroke="#FFFFFF" stroke-width="1.7" stroke-linecap="round"/>
 </svg>
