@@ -280,6 +280,13 @@ function nodes() {
     try { localStorage.setItem('cpc-lang', l); } catch (e) {}
     apply(l);
     syncButtons();
+    // El <html lang> tiene que seguir al idioma que se está mostrando. Si se
+    // queda en "es" con el contenido en inglés, los lectores de pantalla lo
+    // pronuncian con fonética española y Chrome ofrece traducir una página
+    // que ya está en el idioma del usuario.
+    try {
+      document.documentElement.setAttribute('lang', l === 'en' ? 'en' : 'es-EC');
+    } catch (e) {}
   }
 
   document.addEventListener('click', function (e) {
